@@ -1,12 +1,13 @@
 // Textures.js
 
 function creerTextures(objgl, tabImages) {
-	const tabObjTextures = new Array();	
+	const tabObjTextures = new Array();
+	const repo = "Textures/";
 
 	for (let i = 0; i < tabImages.length; i++) {    
 		// L'image de la texture
 		const objImage = new Image();
-		objImage.src = tabImages[i];
+		objImage.src = repo + tabImages[i];
              
 		// Cr�er La texture
         const objTexture = objgl.createTexture();
