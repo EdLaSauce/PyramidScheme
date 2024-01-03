@@ -8,8 +8,11 @@ let cameraJoueur = null;
 let valuesController = null;
 let binRecommence = false;
 let binPeutBouger = true;
+let binPeutLireAudio = false;
 
-const tabImages = ['Transparent.gif', 'soil2.jpg', 'concrete_floor.jpg', 'Ciel.jpg', 'Stone wall.jpg', 'shrub.png', 'gold_x256.jpg', 'herse.png'];
+//const tabImages = ['Transparent.gif', 'soil2.jpg', 'concrete_floor.jpg', 'Ciel.jpg', 'Stone wall.jpg', 'shrub.png', 'gold_x256.jpg', 'herse.png'];
+// images en base64 (pour éviter le transfert cross-origin)
+const tabImages = [Transparent_b64, soil2_b64, concrete_floor_b64,ciel_b64,stone_wall_b64,shrub_b64,gold_256_b64,herse_b64];
 const TEX_TRANSPARENT = 0;
 const TEX_SOL = 1;
 const TEX_ENCLOS = 2;
@@ -20,6 +23,7 @@ const TEX_TRESOR = 6;
 const TEX_HERSE = 7;
 
 function demarrer() {
+    //navigator.permissions.query({name: 'speaker'})
     const objCanvas = document.getElementById('monCanvas');
     objgl = initWebGL(objCanvas);  // Initialise le contexte WebGL
     objProgShaders = initShaders(objgl);
@@ -54,7 +58,7 @@ function initScene3D(objgl) {
     document.getElementById('lblOuvreurs').innerHTML = objNiveau.ouvreurs;
     document.getElementById('lblScore').innerHTML = objNiveau.score;
 
-    if (!binRecommence)
+    if (!binRecommence && binPeutLireAudio)
         if (!objSons.trouverTresor.paused) {
             binPeutBouger = false;
             setTimeout(function () {
